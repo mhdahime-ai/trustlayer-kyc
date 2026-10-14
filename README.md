@@ -1,4 +1,5 @@
 # TrustLayer KYC — Deepfake defence for video-KYC
+   [![CI](https://github.com/mhdahime-ai/trustlayer-kyc/actions/workflows/ci.yml/badge.svg)](https://github.com/mhdahime-ai/trustlayer-kyc/actions/workflows/ci.yml)
 
 A production-style API that checks a video-KYC recording for deepfakes and returns one of four
 decisions a bank can act on: **ALLOW**, **SOFT_WARN**, **ESCALATE** (human review) or **HARD_BLOCK**,
