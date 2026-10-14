@@ -1,0 +1,21 @@
+# Decision policy for the TrustLayer KYC service.
+# Change thresholds here, bump the version, and every new decision records it.
+# TODO: replace these starting values with the ones tuned in your dissertation (M4).
+version: "2026.10-v1"
+
+# How much each branch counts towards the fused risk score (must sum to 1.0)
+weights:
+  visual: 0.40     # CNN face-manipulation probability
+  audio: 0.30      # audio anti-spoofing probability
+  lipsync: 0.30    # lip-landmark / audio sync mismatch score
+
+thresholds:
+  soft_warn: 0.35        # fused score at or above -> SOFT_WARN
+  escalate: 0.60         # fused score at or above -> ESCALATE (human review)
+  hard_block: 0.80       # fused score at or above -> HARD_BLOCK (needs a strong branch too)
+  branch_hard_block: 0.90  # a single branch this confident supports HARD_BLOCK
+  branch_suspicious: 0.50  # two branches above this -> ESCALATE even if fused is lower
+
+quality:
+  min_frames: 8            # fewer usable face frames -> cannot decide confidently
+  min_audio_seconds: 1.0   # less speech than this -> cannot judge audio / lip-sync

@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      TL_MODEL_MODE: ${TL_MODEL_MODE:-stub}
+    volumes:
+      - ./data:/srv/data        # audit log survives restarts
+      - ./weights:/srv/weights:ro  # put visual.onnx, audio.onnx, lipsync.onnx here
